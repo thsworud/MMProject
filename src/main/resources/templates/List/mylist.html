@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<th:block layout:fragment="background" th:include="@{/main/background}"></th:block>
+	<style>
+		@font-face {
+			font-family: 'RixInooAriDuriR';
+			src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+
+		#background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			/* Background를 뒤로 보내기 위해 z-index 사용 */
+		}
+
+		#header {
+			background-color: white;
+			color: black;
+			text-align: left;
+			padding: 3px;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-sizing: border-box;
+		}
+
+		#headertext {
+			font-family: 'RixInooAriDuriR';
+			display: flex;
+			align-items: center;
+		}
+
+		#character {
+			vertical-align: middle;
+			margin-right: 5px;
+			width: 50px;
+			height: 50px;
+		}
+
+		#logout a {
+			text-decoration: none;
+			color: black;
+			margin-right: 10px;
+		}
+
+		#headertext a {
+			text-decoration: none;
+			color: black;
+		}
+
+		#logout a:hover {
+			color: blue;
+
+		}
+
+		#content {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 30%;
+			box-sizing: border-box;
+			padding-top: 7%;
+			/* 헤더 높이만큼 여백 추가 */
+		}
+
+		table {
+			border-collapse: collapse;
+			border: 10px black solid;
+			width: 80%;
+			/* 테이블의 너비를 조정 */
+			max-width: 1000px;
+			/* 최대 너비 설정 */
+			background-color: white;
+		}
+
+		td {
+			border: 1px solid #dddddd;
+			padding: 8px;
+			text-align: center;
+			font-size: large;
+		}
+
+		th {
+			background-color: #585858;
+			color: rgb(233, 233, 233);
+			border: 1px solid #dddddd;
+			padding: 8px;
+			text-align: center;
+		}
+
+		td:nth-child(2n+0) {
+			background-color: rgb(207, 207, 207);
+		}
+
+		.button-link {
+			background-color: black;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 5px;
+			margin: 20px;
+		}
+
+		.button-link1 {
+			background-color: black;
+			color: white;
+			padding: 5px 15px;
+			/* 패딩을 줄여 버튼의 높이를 줄임 */
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 5px;
+			margin: 5px;
+			font-size: 0.9em;
+			/* 폰트 크기를 줄여 버튼 높이 감소 효과 추가 */
+		}
+
+		.button-link:hover {
+			background-color: #333;
+		}
+
+		.button-link1:hover {
+			background-color: #333;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="background"></div>
+
+	<div id="header">
+		<h1 id="headertext">
+			<a href="/main/mainpage"><img src="/img/캐릭터1.png" alt="캐릭터 이미지" id="character"> MovingMethod</a>
+		</h1>
+		<a href="/main/mainpage" role="button" class="button-link">부위별 리스트 보러가기</a>
+		<h3 id="logout"><a href="/members/index">LogOut</a> / <a href="#">회원정보수정</a> / <a
+				th:href="@{'/List/'+${List1}}">운동일지</a></h3>
+	</div>
+	<div id="content" th:object="${List1}">
+		<a th:href="@{'/List/createlist/'+${List1}}" role="button" class="button-link">추가하기</a>
+		<table>
+			<thead>
+				<tr>
+					<th>날짜</th>
+					<th>운동 종목</th>
+					<th>무게 (kg)</th>
+					<th>반복 횟수</th>
+					<th>세트 수</th>
+					<th>부족한 점</th>
+					<th>구분</th>
+				</tr>
+			</thead>
+			<tbody th:each="mylist: ${List}">
+				<tr>
+					<td th:text="${mylist.day1}"></td>
+					<td th:text="${mylist.event1}"></td>
+					<td th:text="${mylist.weight1}"></td>
+					<td th:text="${mylist.number1}"></td>
+					<td th:text="${mylist.set1}"></td>
+					<td th:text="${mylist.feedback1}"></td>
+					<td>
+						<a th:href="@{'/List/edit/'+${mylist.list}}" role="button" class="button-link1">수정</a>
+						<a th:href="@{'/List/delete/'+${mylist.list}}" role="button" class="button-link1">삭제</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

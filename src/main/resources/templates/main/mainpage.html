@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<th:block layout:fragment="background" th:include="@{/main/background}"></th:block>
+	<style>
+		#section {
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#section2 {
+			position: absolute;
+			text-align: center;
+			top: 35%;
+			left: 20%;
+		}
+
+		#section2 a {
+			text-decoration: none;
+			color: black;
+			float: left;
+			font-size: 1.5em;
+			margin-right: 40px;
+		}
+
+		#section2 p {
+			margin-top: 5px;
+		}
+
+		#section2 a :hover {
+			background: rgba(54, 54, 54, 0.5);
+			content: '';
+			-webkit-transition: -webkit-transform 0.3s;
+			-moz-transition: -moz-transform 0.3s;
+			transition: transform 0.3s;
+			-webkit-transform: scale(0.85);
+			-moz-transform: scale(0.85);
+			transform: scale(0.85);
+			color: white;
+		}
+
+		#headtitle {
+			font-size: 4em;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="background"></div>
+	<th:block layout:fragment="loginheader" th:include="@{/main/loginheader}"></th:block>
+	<section id="section">
+		<br>
+		<h1 id="headtitle">부위별 운동 리스트</h1>
+	</section>
+	<section id="section2">
+
+		<a href="/part/chest">
+			<img src="/img/가슴운동.png" style="width: 250px; height: 200px;">
+			<p>가슴운동</p>
+		</a>
+
+		<a href="#">
+			<img src="/img/등운동.png" style="width: 250px; height: 200px;">
+			<p>등운동</p>
+		</a>
+		<a href="#">
+			<img src="/img/어꺠우농.png" style="width: 250px; height: 200px;">
+			<p>어깨운동</p>
+		</a>
+		<a href="#">
+			<img src="/img/팔운동.png" style="width: 250px; height: 200px;">
+			<p>이두근운동</p>
+		</a>
+		<br>
+		<a href="#">
+			<img src="/img/삼두운동.png" style="width: 250px; height: 200px;">
+			<p>삼두근운동</p>
+			<a href="#">
+				<img src="/img/하체운동.png" style="width: 250px; height: 200px;">
+				<p>하체운동</p>
+			</a>
+			<a href="#" type="hidden">
+				<img src="/img/유산소.png" style="width: 250px; height: 200px;">
+				<p>유산소운동</p>
+			</a>
+			<a href="#">
+				<img src="/img/복근운동.png" style="width: 250px; height: 200px;">
+				<p>복근운동</p>
+			</a>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<th:block layout:fragment="background" th:include="@{/main/background}"></th:block>
+	<style>
+		@font-face {
+			font-family: 'RixInooAriDuriR';
+			src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+
+		#background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			/* Background를 뒤로 보내기 위해 z-index 사용 */
+		}
+
+		#header {
+			background-color: white;
+			color: black;
+			text-align: left;
+			padding: 3px;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-sizing: border-box;
+		}
+
+		#headertext {
+			font-family: 'RixInooAriDuriR';
+			display: flex;
+			align-items: center;
+			margin-left: 10px;
+		}
+
+		#character {
+			vertical-align: middle;
+			margin-right: 5px;
+			width: 50px;
+			height: 50px;
+		}
+
+		#logout a {
+			text-decoration: none;
+			color: black;
+			margin-right: 10px;
+		}
+
+		#headertext a {
+			text-decoration: none;
+			color: black;
+		}
+
+		#logout a:hover {
+			color: blue;
+		}
+
+		#content {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 30%;
+			box-sizing: border-box;
+			padding-top: 7%;
+			/* 헤더 높이만큼 여백 추가 */
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 80%;
+			/* 테이블의 너비를 조정 */
+			max-width: 1000px;
+			/* 최대 너비 설정 */
+			background-color: white;
+		}
+
+		th,
+		td {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.button-link {
+			background-color: black;
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 5px;
+			margin: 20px;
+		}
+
+		.button-link1 {
+			background-color: black;
+			color: white;
+			padding: 5px 15px;
+			/* 패딩을 줄여 버튼의 높이를 줄임 */
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			border-radius: 5px;
+			margin: 5px;
+			font-size: 0.9em;
+			/* 폰트 크기를 줄여 버튼 높이 감소 효과 추가 */
+		}
+
+		.button-link:hover {
+			background-color: #333;
+		}
+
+		.button-link1:hover {
+			background-color: #333;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		#container {
+			width: 60%;
+			margin: 20px auto;
+			background-color: rgb(85, 84, 84);
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			color: #fff;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		input[type="text"],
+		input[type="number"],
+		input[type="date"],
+		textarea {
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-sizing: border-box;
+		}
+
+		.button-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		button,
+		.cancel-button {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button {
+			background-color: black;
+			color: #fff;
+		}
+
+		button:hover {
+			background-color: #5a6268;
+		}
+
+		.cancel-button {
+			background-color: black;
+			color: white;
+			text-decoration: none;
+			text-align: center;
+		}
+
+		.cancel-button:hover {
+			background-color: #5a6268;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="background"></div>
+
+	<div id="header">
+		<h1 id="headertext">
+			<a href="/main/mainpage"><img src="/img/캐릭터1.png" alt="캐릭터 이미지" id="character"> MovingMethod</a>
+		</h1>
+		<h3 id="logout"><a href="/members/index">LogOut</a> / <a href="#">회원정보수정</a> / <a
+				th:href="@{'/List/'+${List1}}">운동일지</a></h3>
+	</div>
+
+	<form action="/List/createlist" method="post" th:object="${list}">
+
+		<div id="container">
+			<h1>운동 일지</h1>
+			<!--  <label for="exercise">Number:</label>
+      <input type="text" name="list" id="number" th:value="${largestList.list}"> -->
+
+			<label for="exercise">ID</label>
+			<input type="text" id="ID" th:value="${mylist1}" name="id">
+
+			<label for="event1">운동 종목:</label>
+			<input type="text" id="event1" name="event1">
+
+			<label for="weight">무게 (kg):</label>
+			<input type="number" id="weight" name="weight1">
+
+			<label for="sets">세트 수:</label>
+			<input type="number" id="sets" name="set1">
+
+			<label for="reps">반복 횟수:</label>
+			<input type="number" id="reps" name="number1">
+
+			<label for="day1">운동 날짜:</label>
+			<input type="date" name="day1" id="day1" required>
+
+			<label for="description">부족한 점:</label>
+			<textarea id="description" rows="4" name="feedback1"></textarea>
+
+			<div class="button-container">
+				<button type="submit">저장</button>
+				<a th:href="@{'/List/'+${mylist1}}" class="cancel-button">일지목록</a>
+			</div>
+		</div>
+	</form>
+</body>
+
+</html>

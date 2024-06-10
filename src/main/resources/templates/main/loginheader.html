@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="header">
+	<meta charset="UTF-8">
+	<style>
+		@font-face {
+			font-family: 'RixInooAriDuriR';
+			src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		#header {
+			background-color: white;
+			color: black;
+			text-align: left;
+			padding: 10px;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 7%;
+			display: flex;
+			/* Flexbox를 사용하여 요소들을 가로 정렬 */
+			justify-content: space-between;
+			/* 요소 사이의 여백을 최대한 넓혀 가로 정렬 */
+		}
+
+		#headertext {
+			position: relative;
+			/* 상대적 위치 설정 */
+			bottom: 15px;
+			/* 아래로 5px 이동 */
+			font-family: 'RixInooAriDuriR';
+			left: 10px;
+		}
+
+		#character {
+			vertical-align: middle;
+			/* 이미지를 텍스트와 수직 정렬 */
+			margin-right: 5px;
+			/* 이미지 오른쪽에 간격 추가 */
+			width: 50px;
+			/* 이미지 너비 설정 */
+			height: 50px;
+			/* 이미지 높이 설정 */
+		}
+
+		#logout {
+			position: relative;
+			left: -50px;
+		}
+
+		#logout a {
+			text-decoration: none;
+			/* 링크 텍스트 효과 없애기 */
+			color: black;
+			/* 링크 텍스트 색상 검정으로 설정 */
+		}
+
+		#headertext a {
+			text-decoration: none;
+			/* 링크 텍스트 효과 없애기 */
+			color: black;
+			/* 링크 텍스트 색상 검정으로 설정 */
+		}
+
+		#logout a:hover {
+			color: blue;
+		}
+
+		@keyframes blink-effect {
+			0% {
+				color: rgba(90, 0, 30, 0.7);
+			}
+
+			50% {
+				opacity: 0;
+			}
+		}
+
+		#welcome-message {
+			font-weight: bold;
+			/* 글씨 두께 설정 */
+			margin-top: 10px;
+			font-size: 1.5em;
+			animation: blink-effect 1s step-end infinite;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="header" th:each="user: ${user}">
+		<h1 id="headertext">
+			<a href="/main/mainpage"><img src="/img/캐릭터1.png" alt="캐릭터 이미지" id="character">
+				MovingMethod</a>
+		</h1>
+		<span id="welcome-message" th:text="${user.name} + '님 환영합니다.'"></span>
+		<h3 id="logout"><a href="/members/index">LogOut</a> / <a th:href="@{'/members/edit/'+${user.id}}">회원정보수정</a> /
+			<a th:href="@{'/List/'+${user.id}}">운동일지</a></h3>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymel.org">
+
+<head th:fragment="header">
+	<meta charset="UTF-8">
+	<style>
+		@font-face {
+			font-family: 'RixInooAriDuriR';
+			src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		#header {
+			font-family: 'RixInooAriDuriR';
+			background-color: white;
+			color: black;
+			text-align: left;
+			padding: 10px;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 7%;
+		}
+
+		#headertext {
+			position: relative;
+			/* 상대적 위치 설정 */
+			bottom: 15px;
+			/* 아래로 5px 이동 */
+		}
+
+		#character {
+			vertical-align: middle;
+			/* 이미지를 텍스트와 수직 정렬 */
+			margin-right: 5px;
+			/* 이미지 오른쪽에 간격 추가 */
+			width: 50px;
+			/* 이미지 너비 설정 */
+			height: 50px;
+			/* 이미지 높이 설정 */
+		}
+
+		#headertext a {
+			text-decoration: none;
+			/* 링크 텍스트 효과 없애기 */
+			color: black;
+			/* 링크 텍스트 색상 검정으로 설정 */
+		}
+	</style>
+</head>
+
+<body>
+	<div id="header">
+		<h1 id="headertext">
+			<a href="/members/index"><img src="/img/캐릭터1.png" alt="캐릭터 이미지" id="character">
+				MovingMethod</a>
+		</h1>
+	</div>
+</body>
+
+</html>
